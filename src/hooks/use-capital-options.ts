@@ -20,7 +20,7 @@ export function useCapitalOptions(country: Country): CapitalOptions {
   }, [country])
 
   useEffect(() => {
-    if (capitalOptions.includes(country) && capitalOptions.length === 3) return
+    if (capitalOptions.includes(country) && capitalOptions.length === optionsLength) return
 
     let newCapitalOptions: Country[] = [country]
     while (newCapitalOptions.length !== optionsLength) {

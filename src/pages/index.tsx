@@ -46,9 +46,9 @@ const Home: NextPage = () => {
       <Head>
         <title>Geo Quiz</title>
         <link rel="manifest" href="/manifest.json" />
-        <link href="/icon-72x72.png" rel="icon" type="image/png" sizes="72x72" />
-        <link href="/icon-144x144.png" rel="icon" type="image/png" sizes="144x144" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png"></link>
+        <link href="/icon_72x72.png" rel="icon" type="image/png" sizes="72x72" />
+        <link href="/icon_144x144.png" rel="icon" type="image/png" sizes="144x144" />
+        <link rel="apple-touch-icon" href="/icon_192x192.png"></link>
         <meta name="theme-color" content="#FFF" />
       </Head>
       <Center

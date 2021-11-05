@@ -5,6 +5,8 @@ import { uniq } from 'ramda'
 
 export type CapitalOptions = Country[]
 
+const optionsLength = 4
+
 /**
  * @param country correct country
  * @returns three uniq options where one is the correct country or null
@@ -21,7 +23,7 @@ export function useCapitalOptions(country: Country): CapitalOptions {
     if (capitalOptions.includes(country) && capitalOptions.length === 3) return
 
     let newCapitalOptions: Country[] = [country]
-    while (newCapitalOptions.length !== 3) {
+    while (newCapitalOptions.length !== optionsLength) {
       newCapitalOptions = uniq([...newCapitalOptions, pickRandom(countries)])
     }
     setCapitalOptions(newCapitalOptions)

@@ -2,6 +2,7 @@ import { countries, Country } from '../model/countries'
 import { useEffect, useState } from 'react'
 import { pickRandom } from '../utils/pick-random'
 import { uniq } from 'ramda'
+import { shuffle } from '../utils/shuffle'
 
 export type CapitalOptions = Country[]
 
@@ -26,7 +27,7 @@ export function useCapitalOptions(country: Country): CapitalOptions {
     while (newCapitalOptions.length !== optionsLength) {
       newCapitalOptions = uniq([...newCapitalOptions, pickRandom(countries)])
     }
-    setCapitalOptions(newCapitalOptions)
+    setCapitalOptions(shuffle(newCapitalOptions))
   }, [country, capitalOptions])
 
   return capitalOptions

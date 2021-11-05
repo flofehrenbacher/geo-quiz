@@ -16,6 +16,8 @@ const Home: NextPage = () => {
 
   const [currentSeriesRight, setCurrentSeriesRight] = useState(0)
   const [highscore, setHighscore] = useLocalStorageState('highscore', 0)
+  const [chosenAnswer, setChosenAnswer] = useState<Country | null>(null)
+
   useEffect(() => {
     if (currentSeriesRight > highscore) {
       setHighscore(currentSeriesRight)
@@ -23,6 +25,7 @@ const Home: NextPage = () => {
   }, [currentSeriesRight, highscore, setHighscore])
 
   const onChooseAnswer = (answer: Country) => {
+    setChosenAnswer(country)
     if (answer.capital === country.capital) {
       setQuizState('right')
       setCurrentSeriesRight((prev) => prev + 1)
@@ -35,6 +38,7 @@ const Home: NextPage = () => {
   const onClickNext = () => {
     setCountry(pickRandom(countries))
     setQuizState('question')
+    setChosenAnswer(null)
   }
 
   return (
@@ -72,7 +76,13 @@ const Home: NextPage = () => {
                 key={capitalOption.name}
                 w="50%"
                 disabled={quizState !== 'question'}
-                colorScheme="blackAlpha"
+                colorScheme={'blackAlpha.900'}
+                bg={
+                  chosenAnswer?.capital === capitalOption.capital &&
+                  chosenAnswer?.capital === country.capital
+                    ? 'green'
+                    : 'gray.100'
+                }
                 onClick={() => onChooseAnswer(capitalOption)}
               >
                 {capitalOption.capital}

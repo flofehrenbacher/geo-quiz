@@ -45,6 +45,7 @@ const Home: NextPage = () => {
     <main>
       <Head>
         <title>Geo Quiz</title>
+        <link rel="manifest" href="/manifest.json" />
       </Head>
       <Center
         bg={quizState === 'question' ? 'blue.200' : quizState === 'right' ? 'green.200' : 'red.200'}
@@ -76,12 +77,12 @@ const Home: NextPage = () => {
                 key={capitalOption.name}
                 w="50%"
                 disabled={quizState !== 'question'}
-                colorScheme={'blackAlpha.900'}
+                colorScheme={'blackAlpha'}
                 bg={
                   chosenAnswer?.capital === capitalOption.capital &&
                   chosenAnswer?.capital === country.capital
                     ? 'green'
-                    : 'gray.100'
+                    : undefined
                 }
                 onClick={() => onChooseAnswer(capitalOption)}
               >

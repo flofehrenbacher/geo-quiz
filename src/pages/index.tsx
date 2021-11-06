@@ -1,48 +1,53 @@
-import { Badge, Box, Button, Center, Heading, HStack, VStack } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import { Box, Button, Center, Heading, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
-import React, { useEffect, useRef, useState } from 'react'
-import { useCapitalOptions } from '../hooks/use-capital-options'
-import { useLocalStorageState } from '../hooks/use-local-storage-state'
+import React, { useRef, useState } from 'react'
+import { AnswerOption } from '../components/answer-option'
+import { bgColors, BodyBackground } from '../components/body-background'
+import { useAnswerOptions } from '../hooks/use-capital-options'
+import { useHighscore } from '../hooks/use-highscore'
 import { countries, Country } from '../model/countries'
+import { QuizState } from '../model/quiz-state'
 import { pickRandom } from '../utils/pick-random'
 
-const Home: NextPage = () => {
-  const [country, setCountry] = useState<Country>(pickRandom(countries))
-  const [quizState, setQuizState] = useState<'question' | 'right' | 'wrong'>('question')
+export type GameState = {
+  quizState: QuizState
+  solutionCountry: Country
+  chosenAnswer: Country | null
+}
+export default function Home() {
+  const [gameState, setGameState] = useState<GameState>({
+    quizState: 'question',
+    chosenAnswer: null,
+    solutionCountry: pickRandom(countries),
+  })
+  const { quizState, solutionCountry } = gameState
 
-  const capitalOptions = useCapitalOptions(country)
   const nextButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  const [currentSeriesRight, setCurrentSeriesRight] = useState(0)
-  const [highscore, setHighscore] = useLocalStorageState('highscore', 0)
-  const [chosenAnswer, setChosenAnswer] = useState<Country | null>(null)
-
-  useEffect(() => {
-    if (currentSeriesRight > highscore) {
-      setHighscore(currentSeriesRight)
-    }
-  }, [currentSeriesRight, highscore, setHighscore])
+  const answerOptions = useAnswerOptions(solutionCountry)
+  const { increaseCurrentSeries, resetCurrentSeries, highscoreBadges } = useHighscore()
 
   const onChooseAnswer = (answer: Country) => {
-    setChosenAnswer(country)
-    if (answer.capital === country.capital) {
-      setQuizState('right')
-      setCurrentSeriesRight((prev) => prev + 1)
+    if (answer.capital === solutionCountry.capital) {
+      setGameState((prev) => ({ ...prev, chosenAnswer: answer, quizState: 'correct' }))
+      increaseCurrentSeries()
     } else {
-      setQuizState('wrong')
-      setCurrentSeriesRight(0)
+      setGameState((prev) => ({ ...prev, chosenAnswer: answer, quizState: 'wrong' }))
+      resetCurrentSeries()
     }
   }
 
   const onClickNext = () => {
-    setCountry(pickRandom(countries))
-    setQuizState('question')
-    setChosenAnswer(null)
+    setGameState({
+      solutionCountry: pickRandom(countries),
+      chosenAnswer: null,
+      quizState: 'question',
+    })
   }
 
   return (
     <main>
+      <BodyBackground quizState={quizState} />
       <Head>
         <title>Geo Quiz</title>
         <link rel="manifest" href="/manifest.json" />
@@ -51,47 +56,26 @@ const Home: NextPage = () => {
         <link rel="apple-touch-icon" href="/icon_192x192.png"></link>
         <meta name="theme-color" content="#FFF" />
       </Head>
-      <Center
-        bg={quizState === 'question' ? 'blue.200' : quizState === 'right' ? 'green.200' : 'red.200'}
-        h="100vh"
-        w="100vw"
-        color="white"
-      >
+      <Center bg={bgColors[quizState]} h="100vh" w="100vw" color="white">
         <VStack spacing={5} textAlign="center">
-          <Badge bg="whiteAlpha.900" color="green.500">
-            Highscore {highscore}
-          </Badge>
-          <Badge bg="whiteAlpha.900" color="gray.500">
-            Richtig in Folge {currentSeriesRight}
-          </Badge>
-
+          {highscoreBadges}
           <Heading as="h1" size="4xl" textShadow="2px 2px 0px hotpink, 4px 4px 0px yellow">
             Geo Quiz
             <Heading as="div" mt="5" size="xl" textShadow="none">
               Was ist die Hauptstadt von...?
             </Heading>
           </Heading>
-          <Heading as="h2" size="xl">
-            {country.name}
+          <Heading as="h2" size="xl" textShadow="2px 2px 0px black">
+            {solutionCountry.name}
           </Heading>
           <VStack spacing={5} w="100%">
-            {capitalOptions.map((capitalOption) => (
-              <Button
-                size="md"
-                key={capitalOption.name}
-                w="50%"
-                disabled={quizState !== 'question'}
-                colorScheme={'blackAlpha'}
-                bg={
-                  chosenAnswer?.capital === capitalOption.capital &&
-                  chosenAnswer?.capital === country.capital
-                    ? 'green'
-                    : undefined
-                }
-                onClick={() => onChooseAnswer(capitalOption)}
-              >
-                {capitalOption.capital}
-              </Button>
+            {answerOptions.map((answerOption) => (
+              <AnswerOption
+                key={answerOption.capital}
+                country={answerOption}
+                gameState={gameState}
+                handleClickAnswer={quizState === 'question' ? onChooseAnswer : onClickNext}
+              />
             ))}
             <Box h="5">
               {quizState === 'question' ? null : (
@@ -113,5 +97,3 @@ const Home: NextPage = () => {
     </main>
   )
 }
-
-export default Home

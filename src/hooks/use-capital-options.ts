@@ -4,7 +4,7 @@ import { pickRandom } from '../utils/pick-random'
 import { uniq } from 'ramda'
 import { shuffle } from '../utils/shuffle'
 
-export type CapitalOptions = Country[]
+export type AnswerOptions = Country[]
 
 const optionsLength = 4
 
@@ -12,8 +12,8 @@ const optionsLength = 4
  * @param country correct country
  * @returns three uniq options where one is the correct country or null
  */
-export function useCapitalOptions(country: Country): CapitalOptions {
-  const [capitalOptions, setCapitalOptions] = useState<CapitalOptions>([])
+export function useAnswerOptions(country: Country): AnswerOptions {
+  const [capitalOptions, setCapitalOptions] = useState<AnswerOptions>([])
 
   // reset when country changes
   useEffect(() => {

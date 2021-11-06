@@ -2,8 +2,6 @@
   "name": "Geo Quiz",
   "short_name": "Geo Quiz",
   "dir": "ltr",
-  "theme_color": "#fff",
-  "background_color": "#fff",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",

@@ -55,7 +55,7 @@ export default function Home() {
         <link href="/icon_72x72.png" rel="icon" type="image/png" sizes="72x72" />
         <link href="/icon_144x144.png" rel="icon" type="image/png" sizes="144x144" />
         <link rel="apple-touch-icon" href="/icon_192x192.png"></link>
-        <meta name="theme-color" content="#FFF" />
+        <meta name="theme-color" content={bgColors[quizState]} />
       </Head>
       <Center bg={bgColors[quizState]} h="100vh" w="100vw" color="white">
         <VStack spacing={5} textAlign="center">

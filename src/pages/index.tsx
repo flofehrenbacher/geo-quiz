@@ -1,6 +1,7 @@
 import { Box, Button, Center, Heading, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import Confetti from 'react-confetti'
 import { AnswerOption } from '../components/answer-option'
 import { bgColors, BodyBackground } from '../components/body-background'
 import { useAnswerOptions } from '../hooks/use-capital-options'

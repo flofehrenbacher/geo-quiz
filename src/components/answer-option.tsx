@@ -14,7 +14,7 @@ export function AnswerOption({ country, gameState, handleClickAnswer }: AnswerOp
     <Button
       size="md"
       key={country.name}
-      w="50%"
+      w="100%"
       colorScheme={'blue'}
       borderWidth={4}
       borderColor={background}

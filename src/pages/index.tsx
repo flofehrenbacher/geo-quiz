@@ -57,19 +57,19 @@ export default function Home() {
         <link rel="apple-touch-icon" href="/icon_192x192.png"></link>
         <meta name="theme-color" content={bgColors[quizState]} />
       </Head>
-      <Center bg={bgColors[quizState]} h="100vh" w="100vw" color="white">
-        <VStack spacing={5} textAlign="center">
+      <Center h="100vh" w="100vw" color="white">
+        <VStack spacing={6} textAlign="center">
           {highscoreBadges}
           <Heading as="h1" size="4xl" textShadow="2px 2px 0px hotpink, 4px 4px 0px yellow">
             Geo Quiz
-            <Heading as="div" mt="5" size="xl" textShadow="none">
+            <Heading as="div" mt="5" size="md" textShadow="none">
               Was ist die Hauptstadt von...?
             </Heading>
           </Heading>
           <Heading as="h2" size="xl" textShadow="2px 2px 0px black">
             {solutionCountry.name}
           </Heading>
-          <VStack spacing={5} w="100%">
+          <VStack spacing={4} w="100%">
             {answerOptions.map((answerOption) => (
               <AnswerOption
                 key={answerOption.capital}

@@ -9,6 +9,7 @@ export function BodyBackground({ quizState }: { quizState: QuizState }) {
       styles={css`
         body {
           background-color: ${bgColors[quizState]};
+          transition: background-color 150ms ease-in-out;
         }
       `}
     />

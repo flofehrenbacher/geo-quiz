@@ -25,7 +25,7 @@
     "@testing-library/jest-dom": "5.15.1",
     "@testing-library/react": "12.1.2",
     "@types/node": "16.11.11",
-    "@types/ramda": "0.27.56",
+    "@types/ramda": "0.27.57",
     "@types/react": "17.0.37",
     "babel-jest": "27.4.2",
     "eslint": "8.3.0",

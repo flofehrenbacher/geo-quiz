@@ -28,7 +28,7 @@
     "@types/ramda": "0.27.58",
     "@types/react": "17.0.37",
     "babel-jest": "27.4.2",
-    "eslint": "8.3.0",
+    "eslint": "8.4.0",
     "eslint-config-next": "12.0.5",
     "identity-obj-proxy": "3.0.0",
     "jest": "27.4.3",

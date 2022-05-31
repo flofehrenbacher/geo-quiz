@@ -24,7 +24,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
-    "@types/node": "16.11.36",
+    "@types/node": "16.11.38",
     "@types/ramda": "0.28.13",
     "@types/react": "17.0.45",
     "babel-jest": "27.5.1",

@@ -1,7 +1,6 @@
 import { Box, Button, Center, Heading, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
-import React, { useEffect, useRef, useState } from 'react'
-import Confetti from 'react-confetti'
+import { useRef, useState, useEffect } from 'react'
 import { AnswerOption } from '../components/answer-option'
 import { bgColors, BodyBackground } from '../components/body-background'
 import { useAnswerOptions } from '../hooks/use-capital-options'
@@ -16,12 +15,26 @@ export type GameState = {
   chosenAnswer: Country | null
 }
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
+
+  return <StartGame />
+}
+
+function StartGame() {
   const [gameState, setGameState] = useState<GameState>({
     quizState: 'question',
     chosenAnswer: null,
     solutionCountry: pickRandom(countries),
   })
-  const { quizState, solutionCountry } = gameState
+
+  const { solutionCountry, quizState } = gameState
 
   const nextButtonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -45,6 +58,8 @@ export default function Home() {
       quizState: 'question',
     })
   }
+
+
 
   return (
     <main>
@@ -95,6 +110,5 @@ export default function Home() {
           </VStack>
         </VStack>
       </Center>
-    </main>
-  )
+    </main>)
 }

@@ -59,8 +59,6 @@ function StartGame() {
     })
   }
 
-
-
   return (
     <main>
       <BodyBackground quizState={quizState} />

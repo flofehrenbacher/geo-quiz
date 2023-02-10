@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "16.18.12",
-    "@types/ramda": "0.28.22",
+    "@types/ramda": "0.28.23",
     "@types/react": "17.0.53",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",

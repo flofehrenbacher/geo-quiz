@@ -9,7 +9,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@chakra-ui/react": "2.5.2",
+    "@chakra-ui/react": "2.5.3",
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "next": "13.2.4",

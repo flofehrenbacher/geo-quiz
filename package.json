@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/node": "16.18.22",
     "@types/ramda": "0.28.23",
-    "@types/react": "17.0.54",
+    "@types/react": "17.0.55",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "prettier": "2.8.7",

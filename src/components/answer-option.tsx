@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react'
 import { Country } from '../model/countries'
-import { GameState } from '../pages'
+import { GameState } from '../app/page'
 
 interface AnswerOptionProps {
   country: Country

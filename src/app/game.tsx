@@ -1,33 +1,21 @@
-import { Box, Button, Center, Heading, VStack } from '@chakra-ui/react'
-import Head from 'next/head'
-import { useRef, useState, useEffect } from 'react'
+import { Center, VStack, Heading, Box, Button } from '@chakra-ui/react'
+import { useState, useRef, useEffect } from 'react'
 import { AnswerOption } from '../components/answer-option'
-import { bgColors, BodyBackground } from '../components/body-background'
+import { BodyBackground } from '../components/body-background'
 import { useAnswerOptions } from '../hooks/use-capital-options'
 import { useHighscore } from '../hooks/use-highscore'
 import { countries, Country } from '../model/countries'
-import { QuizState } from '../model/quiz-state'
 import { pickRandom } from '../utils/pick-random'
+import { GameState } from './page'
+import { Metadata } from 'next'
+import { bgColors } from '../utils/background-colors'
 
-export type GameState = {
-  quizState: QuizState
-  solutionCountry: Country
-  chosenAnswer: Country | null
-}
-export default function Home() {
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted) {
-    return null
-  }
-
-  return <StartGame />
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Welcome to Next.js',
 }
 
-function StartGame() {
+export function Game() {
   const [gameState, setGameState] = useState<GameState>({
     quizState: 'question',
     chosenAnswer: null,
@@ -35,6 +23,11 @@ function StartGame() {
   })
 
   const { solutionCountry, quizState } = gameState
+
+  useEffect(() => {
+    const themeColor = document.querySelector('[name="theme-color"]')
+    themeColor?.setAttribute('content', bgColors[quizState])
+  }, [quizState])
 
   const nextButtonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -62,14 +55,6 @@ function StartGame() {
   return (
     <main>
       <BodyBackground quizState={quizState} />
-      <Head>
-        <title>Geo Quiz</title>
-        <link rel="manifest" href="/manifest.json" />
-        <link href="/icon_72x72.png" rel="icon" type="image/png" sizes="72x72" />
-        <link href="/icon_144x144.png" rel="icon" type="image/png" sizes="144x144" />
-        <link rel="apple-touch-icon" href="/icon_192x192.png"></link>
-        <meta name="theme-color" content={bgColors[quizState]} />
-      </Head>
       <Center h="100vh" w="100vw" color="white">
         <VStack spacing={6} textAlign="center">
           {highscoreBadges}
@@ -108,5 +93,6 @@ function StartGame() {
           </VStack>
         </VStack>
       </Center>
-    </main>)
+    </main>
+  )
 }

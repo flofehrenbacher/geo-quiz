@@ -1,7 +1,6 @@
-import { theme } from '@chakra-ui/react'
 import { css, Global } from '@emotion/react'
-import React from 'react'
 import { QuizState } from '../model/quiz-state'
+import { bgColors } from '../utils/background-colors'
 
 export function BodyBackground({ quizState }: { quizState: QuizState }) {
   return (
@@ -14,10 +13,4 @@ export function BodyBackground({ quizState }: { quizState: QuizState }) {
       `}
     />
   )
-}
-
-export const bgColors: Record<QuizState, string> = {
-  question: theme.colors.blue[400],
-  correct: theme.colors.green[400],
-  wrong: theme.colors.red[400],
 }

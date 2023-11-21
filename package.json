@@ -20,7 +20,7 @@
     "react-use": "17.4.0"
   },
   "devDependencies": {
-    "@types/node": "18.18.10",
+    "@types/node": "18.18.11",
     "@types/ramda": "0.29.9",
     "@types/react": "18.2.37",
     "eslint": "8.54.0",

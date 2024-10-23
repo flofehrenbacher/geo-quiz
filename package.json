@@ -23,7 +23,7 @@
     "@types/node": "18.19.59",
     "@types/ramda": "0.30.2",
     "@types/react": "18.3.12",
-    "eslint": "8.57.1",
+    "eslint": "9.13.0",
     "eslint-config-next": "13.5.7",
     "prettier": "3.3.3",
     "typescript": "5.6.3"
